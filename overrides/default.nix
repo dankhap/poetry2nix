@@ -2045,6 +2045,9 @@ lib.composeManyExtensions [
 
       mujoco = super.mujoco.overridePythonAttrs (old: {
         propagatedBuildInputs = (old.propagatedBuildInputs or [ ]) ++ [ self.setuptools ];
+        nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [
+          pkgs.mujoco
+        ];
       });
       
       pynetbox = super.pynetbox.overridePythonAttrs (old: {
