@@ -2045,7 +2045,12 @@ lib.composeManyExtensions [
 
       mujoco = super.mujoco.overridePythonAttrs (old: {
         propagatedBuildInputs = (old.propagatedBuildInputs or [ ]) ++ [ self.setuptools ];
+        preConfigure = ''
+        export MUJOCO_PATH=${pkgs.mujoco}
+        export MUJOCO_PLUGIN_PATH=${pkgs.mujoco}/plugins
+        '';
         nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [
+          pkgs.cmake
           pkgs.mujoco
         ];
       });
