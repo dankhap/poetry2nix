@@ -9714,6 +9714,9 @@
   "mt-940": [
     "setuptools"
   ],
+  "mujoco": [
+    "setuptools"
+  ],
   "mujson": [
     "setuptools"
   ],

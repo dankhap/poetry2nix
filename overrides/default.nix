@@ -602,6 +602,16 @@ lib.composeManyExtensions [
         }
       );
 
+      dm-tree = super.dm-tree.overridePythonAttrs (
+        old: {
+          nativeBuildInputs = [ pkgs.cmake ] ++ old.nativeBuildInputs;
+          dontUseCmakeConfigure = true;
+          postConfigure = ''
+            export HOME=$(mktemp -d)
+          '';
+        }
+      );
+
       # Setuptools >= 60 broke build_py_2to3
       docutils =
         if lib.versionOlder super.docutils.version "0.16" && lib.versionAtLeast super.setuptools.version "60" then
@@ -2033,6 +2043,10 @@ lib.composeManyExtensions [
         }
       );
 
+      mujoco = super.mujoco.overridePythonAttrs (old: {
+        propagatedBuildInputs = (old.propagatedBuildInputs or [ ]) ++ [ self.setuptools ];
+      });
+      
       pynetbox = super.pynetbox.overridePythonAttrs (old: {
         propagatedBuildInputs = (old.propagatedBuildInputs or [ ]) ++ [ self.setuptools ];
       });
