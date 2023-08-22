@@ -2053,6 +2053,7 @@ lib.composeManyExtensions [
           pkgs.cmake
           pkgs.mujoco
         ];
+        dontUseCmakeConfigure = true;
       });
       
       pynetbox = super.pynetbox.overridePythonAttrs (old: {
